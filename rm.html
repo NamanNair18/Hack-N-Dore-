@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Maintenance Reminder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #15375a;
+            color: #fff;
+        }
+        
+        h1 {
+            text-align: left;
+            font-size: 36px;
+            margin: 0;
+        }
+        
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: #ddd;
+            margin: 10px 0;
+        }
+        
+        form {
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f7f7f7;
+            color: #000;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        input[type="text"], input[type="date"], input[type="number"] {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        button[type="button"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button[type="button"]:hover {
+            background-color: #3e8e41;
+        }
+        
+        #prediction-result {
+            margin-top: 40px;
+        }
+        
+        #reminder-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        #reminder-table th, #reminder-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        #reminder-table th {
+            background-color: #f0f0f0;
+            color: #000;
+        }
+        
+        #reminder-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+            color: #000;
+        }
+        
+        #reminder-table tr:nth-child(odd) {
+            background-color: #fff;
+            color: #000;
+        }
+        
+        .alert-box {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f0f0f0;
+            color: #000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .alert-box h3 {
+            margin-top: 0;
+        }
+        
+        .alert-box ul {
+            list-style: disc;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Vehicle Maintenance Reminder</h1>
+    <hr>
+    <form>
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category"><br>
+        
+        <label for="vehicle-no">Vehicle No:</label>
+        <input type="text" id="vehicle-no" name="vehicle-no"><br>
+        
+        <label for="service-date">Service Date:</label>
+        <input type="date" id="service-date" name="service-date"><br>
+        
+        <label for="kilometers-driven">Kilometers Driven:</label>
+        <input type="number" id="kilometers-driven" name="kilometers-driven"><br>
+        
+        <button id="predict-button" type="button">See Details</button>
+    </form>
+    
+    <div id="prediction-result">
+        <table id="reminder-table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Vehicle No</th>
+                    <th>Service Date</th>
+                    <th>Kilometers Driven</th>
+                    <th>Next Service Date</th>
+                </tr>
+            </thead>
+            <tbody id="reminder-table-body">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const predictButton = document.getElementById('predict-button');
+        const categoryInput = document.getElementById('category');
+        const vehicleNoInput = document.getElementById('vehicle-no');
+        const serviceDateInput = document.getElementById('service-date');
+        const kilometersDrivenInput = document.getElementById('kilometers-driven');
+        const reminderTableBody = document.getElementById('reminder-table-body');
+        const predictionResult = document.getElementById('prediction-result');
+        
+        predictButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            const category = categoryInput.value;
+            const vehicleNo = vehicleNoInput.value;
+            const serviceDate = serviceDateInput.value;
+            const kilometersDriven = kilometersDrivenInput.value;
+        
+            // Calculate next service date
+            const nextServiceDate = new Date(serviceDate);
+            nextServiceDate.setFullYear(nextServiceDate.getFullYear() + 1);
+        
+            // Create table row
+            const tableRow = document.createElement('tr');
+            tableRow.innerHTML = `
+                <td>${category}</td>
+                <td>${vehicleNo}</td>
+                <td>${serviceDate}</td>
+                <td>${kilometersDriven}</td>
+                <td>${nextServiceDate.toLocaleDateString()}</td>
+            `;
+        
+            // Add table row to table body
+            reminderTableBody.appendChild(tableRow);
+        
+            // Create alert box
+            const alertBox = document.createElement('div');
+            alertBox.className = 'alert-box';
+            alertBox.innerHTML = `
+                <h3>Monthly Check Alert:</h3>
+                <p>Please ensure to check for:</p>
+                <ul>
+                 <li>Oil Leakage</li>
+                 <li>Tire Pressure</li>
+                 <li>Coolant Levels</li>
+                 <li>PUC (Pollution Check)</li>
+                </ul>
+                <p>to maintain optimal vehicle performance.</p>
+            `;
+        
+            // Add alert box to prediction result
+            predictionResult.appendChild(alertBox);
+        }); 
+    </script>
+</body>
+</html>

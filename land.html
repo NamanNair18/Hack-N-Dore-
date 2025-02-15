@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lands in Indore</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #15375a;
+      color: #fff;
+    }
+
+    h2 {
+      text-align: left;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    hr {
+      border: 3px solid #fff;
+      margin-bottom: 20px;
+    }
+
+    .category-dropdown {
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      border: 3px solid #ddd;
+      padding: 10px;
+      text-align: left;
+      font-size: 18px;
+    }
+
+    th {
+      background-color: #f0f0f0;
+      color: #000;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+      color: #000;
+    }
+
+    tr:nth-child(odd) {
+      background-color: #fff;
+      color: #000;
+    }
+
+    .add-asset-form {
+      background-color: #f7f7f7;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 50%;
+      margin: 40px auto;
+      color: #000;
+    }
+
+    .add-asset-form h3 {
+      margin-top: 0;
+    }
+
+    .add-asset-form label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .add-asset-form input, .add-asset-form select {
+      width: 100%;
+      height: 40px;
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .add-asset-form input:focus, .add-asset-form select:focus {
+      border-color: #aaa;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .add-asset-form button[type="submit"] {
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .add-asset-form button[type="submit"]:hover {
+      background-color: #3e8e41;
+    }
+  </style>
+</head>
+<body>
+  <h2>Lands in Indore</h2>
+  <hr>
+  <div class="category-dropdown">
+    <label for="category">Category:</label>
+    <select id="category" name="category">
+      <option value="">Select Category</option>
+      <option value="Bare Land">Bare Land</option>
+      <option value="School">School</option>
+      <option value="Hospital">Hospital</option>
+      <option value="Park">Park</option>
+      <option value="Other">Other</option>
+    </select>
+  </div>
+  <table id="lands-table">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Plot No.</th>
+        <th>Area (sq.meter)</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Bare Land</td>
+        <td>Plot 1</td>
+        <td>100 x 100</td>
+        <td>Vijay Nagar</td>
+      </tr>
+      <tr>
+        <td>School</td>
+        <td>Plot 2</td>
+        <td>123 x 342</td>
+        <td>Rajendra Nagar</td>
+      </tr>
+      <tr>
+        <td>Hospital</td>
+        <td>Plot 3</td>
+        <td>136 x 434</td>
+        <td>Scheme 54</td>
+      </tr>
+      <tr>
+        <td>Park</td>
+        <td>Plot 4</td>
+        <td>366 x 349</td>
+        <td>Palasia</td>
+      </tr>
+      <tr>
+        <td>Other</td>
+        <td>Plot 5</td>
+        <td>245 x 659</td>
+        <td>MR 10</td>
+      </tr>
+      <tr>
+        <td>Bare Land</td>
+        <td>Plot 6</td>
+        <td>470 x 125</td>
+        <td>Airport Road</td>
+      </tr>
+      <tr>
+        <td>School</td>
+        <td>Plot 7</td>
+        <td>245 x 657</td>
+        <td>Sudama Nagar</td>
+      </tr>
+      <tr>
+        <td>Hospital</td>
+        <td>Plot 8</td>
+        <td>354 x 135</td>
+        <td>Bhawarkua</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="add-asset-form">
+    <h3>Add New Land</h3>
+    <form id="add-land-form">
+      <label for="category">Category:</label>
+      <select id="category" name="category">
+        <option value="Bare Land">Bare Land</option>
+        <option value="School">School</option>
+        <option value="Hospital">Hospital</option>
+        <option value="Park">Park</option>
+        <option value="Other">Other</option>
+      </select>
+      <br>
+      <label for="plot-no">Plot No:</label>
+      <input type="text" id="plot-no" name="plot-no"><br>
+      <label for="area">Area (sq.meter):</label>
+      <input type="text" id="area" name="area"><br>
+      <label for="location">Location:</label>
+      <input type="text" id="location" name="location"><br>
+      <button type="submit">Add Land</button>
+    </form>
+  </div>
+
+  <script>
+    const categorySelect = document.getElementById('category');
+    const landsTable = document.getElementById('lands-table');
+    const addLandForm = document.getElementById('add-land-form');
+    const landsTableBody = document.getElementById('lands-table').getElementsByTagName('tbody')[0];
+
+    categorySelect.addEventListener('change', (e) => {
+      const selectedCategory = e.target.value;
+      const rows = landsTable.rows;
+
+      for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+        const categoryCell = row.cells[0];
+        if (selectedCategory === '' || categoryCell.textContent === selectedCategory) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      }
+    });
+
+    addLandForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const category = addLandForm.querySelector('select[name="category"]').value;
+      const plotNo = addLandForm.querySelector('input[name="plot-no"]').value;
+      const area = addLandForm.querySelector('input[name="area"]').value;
+      const location = addLandForm.querySelector('input[name="location"]').value;
+
+      const newRow = document.createElement('tr');
+      newRow.innerHTML = `
+        <td>${category}</td>
+        <td>${plotNo}</td>
+        <td>${area}</td>
+        <td>${location}</td>
+      `;
+
+      landsTableBody.appendChild(newRow);
+
+      addLandForm.reset();
+    });
+  </script>
+</body>
+</html>

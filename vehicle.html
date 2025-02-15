@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehicle</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #15375a;
+      color: #fff;
+    }
+
+    h2 {
+      text-align: left;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .category-container {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-container label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .category-container select {
+      width: 100%;
+      height: 30px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .category-container select:focus {
+      outline: none;
+      border-color: #aaa;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f0f0f0;
+      color: #000;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+      color: #000;
+    }
+
+    tr:nth-child(odd) {
+      background-color: #fff;
+      color: #000;
+    }
+
+    .add-asset-form {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #f7f7f7;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      color: #000;
+    }
+    
+    .add-asset-form h3 {
+      margin-top: 0;
+      color: #000;
+    }
+    
+    .add-asset-form label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #333;
+    }
+    
+    .add-asset-form select, .add-asset-form input[type="text"], .add-asset-form input[type="date"] {
+      width: 100%;
+      height: 40px;
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    
+    .add-asset-form select:focus, .add-asset-form input[type="text"]:focus, .add-asset-form input[type="date"]:focus {
+      border-color: #aaa;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .add-asset-form button[type="submit"] {
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .add-asset-form button[type="submit"]:hover {
+      background-color: #3e8e41;
+    }
+  </style>
+</head>
+<body>
+  <h2>Vehicle</h2>
+
+  <div class="category-container">
+    <label for="category">Category:</label>
+    <select id="category" name="category">
+      <option value="all">All</option>
+      <option value="bus">Bus</option>
+      <option value="car">Car</option>
+      <option value="garbage-truck">Garbage Truck</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
+
+  <table id="vehicle-table">
+    <thead>
+      <tr>
+        <th>Vehicle Type</th>
+        <th>Vehicle No</th>
+        <th>Route No</th>
+        <th>Condition</th>
+        <th>Service Date</th>
+      </tr>
+    </thead>
+    <tbody id="vehicle-table-body">
+      <tr>
+        <td>Bus</td>
+        <td>KA-01-HB-1234</td>
+        <td>Route 1</td>
+        <td>Good</td>
+        <td>2022-01-01</td>
+      </tr>
+      <tr>
+        <td>Car</td>
+        <td>MH-02-AB-5678</td>
+        <td>Route 2</td>
+        <td>Fair</td>
+        <td>2022-01-15</td>
+      </tr>
+      <tr>
+        <td>Garbage Truck</td>
+        <td>DL-03-CD-9012</td>
+        <td>Route 3</td>
+        <td>Poor</td>
+        <td>2022-02-01</td>
+      </tr>
+      <tr>
+        <td>Other</td>
+        <td>RJ-04-EF-3456</td>
+        <td>Route 4</td>
+        <td>Good</td>
+        <td>2022-03-01</td>
+      </tr>
+      <tr>
+        <td>Bus</td>
+        <td>UP-05-GH-7890</td>
+        <td>Route 1</td>
+        <td>Fair</td>
+        <td>2022-04-01</td>
+      </tr>
+      <tr>
+        <td>Car</td>
+        <td>MP-06-IJ-2345</td>
+        <td>Route 2</td>
+        <td>Poor</td>
+        <td>2022-05-01</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="add-asset-form">
+    <h3>Add New Asset</h3>
+    <form id="add-asset-form">
+      <label for="vehicle-type">Vehicle Type:</label>
+      <select id="vehicle-type" name="vehicle-type">
+        <option value="bus">Bus</option>
+        <option value="car">Car</option>
+        <option value="garbage-truck">Garbage Truck</option>
+        <option value="other">Other</option>
+    </select>
+    <br>
+    <label for="vehicle-no">Vehicle No:</label>
+    <input type="text" id="vehicle-no" name="vehicle-no"><br>
+    <label for="route-no">Route No:</label>
+    <input type="text" id="route-no" name="route-no"><br>
+    <label for="condition">Condition:</label>
+    <select id="condition" name="condition">
+      <option value="good">Good</option>
+      <option value="fair">Fair</option>
+      <option value="poor">Poor</option>
+    </select>
+    <br>
+    <label for="service-date">Service Date:</label>
+    <input type="date" id="service-date" name="service-date"><br>
+    <button type="submit">Add Asset</button>
+  </form>
+</div>
+
+<script>
+  // Get the select element
+  const categorySelect = document.getElementById('category');
+
+  // Get the table body element
+  const tableBody = document.getElementById('vehicle-table-body');
+
+  // Get the add asset form
+  const addAssetForm = document.getElementById('add-asset-form');
+
+  // Add an event listener to the select element
+  categorySelect.addEventListener('change', (e) => {
+    // Get the selected value
+    const selectedValue = e.target.value;
+
+    // Filter the table rows based on the selected category
+    Array.prototype.forEach.call(tableBody.children, (row) => {
+      if (selectedValue === 'all' || row.children[0].textContent.toLowerCase() === selectedValue) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });
+
+  // Add an event listener to the add asset form
+  addAssetForm.addEventListener('submit', (e) => {
+    // Prevent the default form submission behavior
+    e.preventDefault();
+
+    // Get the form data
+    const vehicleType = document.getElementById('vehicle-type').value;
+    const vehicleNo = document.getElementById('vehicle-no').value;
+    const routeNo = document.getElementById('route-no').value;
+    const condition = document.getElementById('condition').value;
+    const serviceDate = document.getElementById('service-date').value;
+
+    // Create a new table row
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${vehicleType}</td>
+      <td>${vehicleNo}</td>
+      <td>${routeNo}</td>
+      <td>${condition}</td>
+      <td>${serviceDate}</td>
+    `;
+
+    // Add the new row to the table body
+    tableBody.appendChild(row);
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Municipal Asset Reporting</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #15375a; /* Background color for the page */
+      color: black; /* White text color for contrast */
+    }
+
+    header {
+      background-color: #003366; /* Updated background color to blue */
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 36px;
+      font-weight: bold; /* Making the heading bold */
+    }
+
+    main {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      background-color: #ffffff; /* White background for main content */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    section {
+      flex: 1;
+      margin: 20px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #ffffff; /* Background color for sections */
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-top: 0;
+      font-weight: bold; /* Making the subheadings bold */
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #003366; /* Color for labels to match the blue background */
+    }
+
+    input, select, textarea {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9; /* Light background for form elements */
+      color: #333;
+    }
+
+    button {
+      background-color: #003366; /* Updated button background color to blue */
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #002244; /* Darker blue for hover effect */
+    }
+
+    #issue-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #issue-list li {
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+      color: #003366; /* Text color for issue list items */
+    }
+
+    #issue-list li:last-child {
+      border-bottom: none;
+    }
+
+    #resolution-message {
+      margin-top: 20px;
+      font-style: italic;
+      color: black; /* Text color for the resolution message */
+    }
+
+    .credit-score {
+      margin-top: 20px;
+    }
+
+    .review-bar {
+      margin-top: 10px;
+    }
+
+    .review-bar label {
+      margin-right: 10px;
+      color: #003366; /* Color for review bar labels */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Municipal Asset Reporting</h1>
+  </header>
+  <main>
+    <section id="report-issue">
+      <h2>Report an Issue</h2>
+      <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <label for="mobile-number">Mobile Number:</label>
+        <input type="tel" id="mobile-number" name="mobile-number">
+        <label for="issue-type">Issue Type:</label>
+        <select id="issue-type" name="issue-type">
+          <option value="streetlight">Broken Streetlight</option>
+          <option value="pothole">Pothole</option>
+          <option value="other">Other</option>
+        </select>
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description"></textarea>
+        <label for="aadhar-number">Aadhar Number:</label>
+        <input type="number" id="aadhar-number" name="aadhar-number">
+        <label for="upload-file">Upload a Picture/Video:</label>
+        <input type="file" id="upload-file" name="upload-file">
+        <button id="submit-issue">Submit Issue</button>
+      </form>
+    </section>
+    <section id="issue-status">
+      <h2>Issue Status</h2>
+      <ul id="issue-list">
+        <!-- issues will be displayed here -->
+      </ul>
+      <p id="resolution-message"></p>
+    </section>
+    <section id="credit-score-section">
+      <h2>Credit Score</h2>
+      <div id="credit-score" class="credit-score">
+        <p>Current Credit Score: <span id="current-credit-score">230</span></p>
+        <div class="review-bar">
+          <label for="review-select">Add Points:</label>
+          <select id="review-select">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <button id="update-score">Update Score</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    let issues = [];
+    let creditScore = 230;
+
+    const submitButton = document.getElementById('submit-issue');
+    const issueList = document.getElementById('issue-list');
+    const resolutionMessage = document.getElementById('resolution-message');
+    const reviewSelect = document.getElementById('review-select');
+    const updateScoreButton = document.getElementById('update-score');
+    const currentCreditScore = document.getElementById('current-credit-score');
+    
+    submitButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const mobileNumber = document.getElementById('mobile-number').value;
+      const issueType = document.getElementById('issue-type').value;
+      const location = document.getElementById('location').value;
+      const description = document.getElementById('description').value;
+      const aadharNumber = document.getElementById('aadhar-number').value;
+      const uploadFile = document.getElementById('upload-file').files[0];
+      
+      // Process the issue submission logic
+      issues.push({ name, mobileNumber, issueType, location, description, aadharNumber, uploadFile });
+      
+      // Update issue list
+      const listItem = document.createElement('li');
+listItem.textContent = `${name} reported ${issueType} at ${location}`;
+issueList.appendChild(listItem);
+
+// Show resolution message
+// (Add your code here to show a resolution message if necessary)
+
+      
+      // Show resolution message
+      resolutionMessage.innerHTML = 'Thank you! Your issue has been reported.<br>Designated person to solve the issue: Ramesh Mishra (9876345623)<br>Please rate our service based on your experience.';
+    });
+
+    updateScoreButton.addEventListener('click', () => {
+      const points = parseInt(reviewSelect.value);
+      creditScore += points;
+      currentCreditScore.textContent = creditScore;
+    });
+  </script>
+</body>
+</html>
